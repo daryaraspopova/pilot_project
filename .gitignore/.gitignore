@@ -1,0 +1,19 @@
+import lightgbm as lgb
+
+
+estimator = lgb.LGBMRegressor()
+
+
+param_grid = {
+    'learning_rate': [0.01, 0.1, 0.5, 1],
+    'n_estimators': [20, 40, 60],
+    'num_leaves': [20, 30, 40],
+    'num_trees': [100, 200, 300],
+    'metric': ['auc', 'binary_logloss']
+}
+
+gbm = GridSearchCV(estimator, param_grid)
+
+gbm.fit(X_train, y_train)
+
+print('Best params:', gbm.best_params_)
